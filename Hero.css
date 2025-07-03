@@ -1,0 +1,86 @@
+:root {
+  --primary-shade: #775646;
+  --accent-gold: #efbf04;
+  --heading-color: #775646;
+  --background-section: #ebe4c391;
+  --text-background: #483901;
+  --bullet-active: #92786b;
+  --bullet-inactive: #c9bbb5;
+  --font-family: "Cormorant Garamond", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  overflow-x: hidden;
+  background: linear-gradient(135deg, var(--background-section), #f5f0e8);
+}
+
+/* Color Block Overlay */
+.color-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  pointer-events: none;
+}
+
+.color-block-left {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-shade),
+    var(--text-background)
+  );
+  animation: blockSplitLeft 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.5s forwards;
+}
+
+.color-block-right {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--accent-gold), #f4d03f);
+  animation: blockSplitRight 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes blockSplitLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes blockSplitRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Overlay fade out */
+.color-overlay {
+  animation: overlayFadeOut 0.3s ease 2.3s forwards;
+}
+
+@keyframes overlayFadeOut {
+  to {
+    visibility: hidden;
+    z-index: -1;
+  }
+}
