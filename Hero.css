@@ -84,3 +84,206 @@ body {
     z-index: -1;
   }
 }
+
+/* Navigation */
+.main-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(0.9375rem);
+  background: rgba(235, 228, 195, 0.25);
+  border-bottom: 0.0625rem solid rgba(119, 86, 70, 0.2);
+  padding: 0.5rem 2rem;
+  transition: all 0.3s ease;
+  height: 5.9375rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.hamburger-toggle {
+  display: none;
+}
+
+.hamburger-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  width: 3.125rem;
+  height: 3.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-btn:hover {
+  background: rgba(239, 191, 4, 0.2);
+}
+
+.hamburger-lines {
+  position: relative;
+  width: 1.5625rem;
+  height: 0.1875rem;
+  background: var(--primary-shade);
+  transition: all 0.3s ease;
+  border-radius: 0.125rem;
+}
+
+.hamburger-lines::before,
+.hamburger-lines::after {
+  content: "";
+  position: absolute;
+  width: 1.5625rem;
+  height: 0.1875rem;
+  background: var(--primary-shade);
+  border-radius: 0.125rem;
+  transition: all 0.3s ease;
+}
+
+.hamburger-lines::before {
+  top: -0.5rem;
+}
+
+.hamburger-lines::after {
+  bottom: -0.5rem;
+}
+
+/* Hamburger Animation when Menu is Open */
+.hamburger-toggle:checked + .hamburger-btn .hamburger-lines {
+  background: transparent;
+}
+
+.hamburger-toggle:checked + .hamburger-btn .hamburger-lines::before {
+  top: 0;
+  transform: rotate(45deg);
+  background: #2f2f2f;
+}
+
+.hamburger-toggle:checked + .hamburger-btn .hamburger-lines::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+  background: #2f2f2f;
+}
+
+.hamburger-toggle:checked + .hamburger-btn {
+  background: rgba(218, 165, 32, 0.4);
+}
+
+.brand-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container {
+  width: 8.3125rem;
+  height: 6rem;
+  background: linear-gradient(
+    135deg,
+    rgba(239, 191, 4, 0.15),
+    rgba(119, 86, 70, 0.1)
+  );
+  border: 0.125rem solid var(--primary-shade);
+  border-radius: 0.75rem;
+  padding: 0.4rem;
+  box-shadow: 0 0.5rem 1.5625rem rgba(119, 86, 70, 0.3),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0.625rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(239, 191, 4, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.logo-container:hover::before {
+  left: 100%;
+}
+
+.logo-container:hover {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.75rem 2.1875rem rgba(119, 86, 70, 0.4),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.4);
+  border-color: var(--text-background);
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  filter: contrast(1.1) brightness(1.05);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-container:hover .logo-image {
+  filter: contrast(1.2) brightness(1.1);
+  transform: scale(1.02);
+}
+
+.nav-social {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.social-btn {
+  background: rgba(119, 86, 70, 0.1);
+  border: 1px solid var(--primary-shade);
+  color: var(--primary-shade);
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.social-btn:hover {
+  background: var(--accent-gold);
+  color: white;
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.25rem rgba(239, 191, 4, 0.4);
+}
