@@ -70,7 +70,7 @@ a {
 }
 
 a:hover {
-  color: #1d7480;
+  /* color: #1d7480; */
 }
 
 /* Accessibility */
@@ -171,9 +171,9 @@ a:hover {
   backdrop-filter: blur(0.9375rem);
   background: rgba(235, 228, 195, 0.25);
   border-bottom: 0.0625rem solid rgba(119, 86, 70, 0.2);
-  padding: 0.5rem 2rem;
+  padding: 4rem 2rem;
   transition: all 0.3s ease;
-  height: 6rem;
+  height: 10rem;
   display: flex;
   align-items: center;
 }
@@ -184,6 +184,7 @@ a:hover {
   justify-content: space-between;
   max-width: 120rem;
   margin: 0 auto;
+  /* padding : 4rem ;  */
   width: 100%;
   position: relative;
 }
@@ -318,9 +319,9 @@ a:hover {
 }
 
 .nav-social {
-  display: flex;
-  gap: 1rem;
-  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
   justify-content: flex-end;
 }
 
@@ -328,12 +329,12 @@ a:hover {
   background: rgba(119, 86, 70, 0.1);
   border: 0.1rem solid #775646;
   color: #775646;
-  padding: 0.75rem;
+  padding: 1.15rem;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .social-btn:hover {
@@ -444,9 +445,12 @@ a:hover {
 }
 
 .hero-image {
-  width: 100%;
-  height: 35rem;
+  height : 51rem;
+    width: 41rem;
   object-fit: cover;
+  transform : scale(1.1) ; 
+  filter: grayscale(50%) brightness(0.9) blur(0.08rem);
+  border-radius: 0px;
 }
 
 .hero-content {
@@ -500,6 +504,12 @@ a:hover {
   box-shadow: 0 0.5rem 1.5625rem rgba(239, 191, 4, 0.4);
   position: relative;
   overflow: hidden;
+}
+.cta-button:hover {
+  background: linear-gradient(135deg, #f4d03f, #efbf04);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.625rem 1.875rem rgba(239, 191, 4, 0.5);
+  color : #775646
 }
 
 /* ==========================================================================
