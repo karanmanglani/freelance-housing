@@ -1,0 +1,963 @@
+/* ==========================================================================
+   1. Base Styles (Variables removed, sizes in REM, fonts increased)
+   ========================================================================== */
+
+/* Base setup: 1rem = 10px */
+html {
+  font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Cormorant Garamond", "Playfair Display", serif;
+  font-size: 1.6rem; /* Increased base font size */
+  line-height: 1.6;
+  color: #13343b;
+  background-color: #fcfcf9;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #13343b;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: 4.2rem;
+} /* Increased */
+h2 {
+  font-size: 3.6rem;
+} /* Increased */
+h3 {
+  font-size: 3rem;
+} /* Increased */
+h4 {
+  font-size: 2.4rem;
+} /* Increased */
+h5 {
+  font-size: 2rem;
+} /* Increased */
+h6 {
+  font-size: 1.8rem;
+} /* Increased */
+
+p {
+  margin: 0 0 1.6rem 0;
+}
+
+a {
+  color: #21808d;
+  text-decoration: none;
+  transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+a:hover {
+  color: #1d7480;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 0.1rem;
+  height: 0.1rem;
+  padding: 0;
+  margin: -0.1rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: 0.2rem solid #21808d;
+  outline-offset: 0.2rem;
+}
+
+/* Font Faces */
+@font-face {
+  font-family: "FKGroteskNeue";
+  src: url("https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2")
+    format("woff2");
+}
+
+/* ==========================================================================
+   2. Hero Section Styles
+   ========================================================================== */
+
+/* Color Block Overlay */
+.color-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  pointer-events: none;
+}
+
+.color-block-left {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #775646, #483901);
+  animation: blockSplitLeft 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.5s forwards;
+}
+
+.color-block-right {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #efbf04, #f4d03f);
+  animation: blockSplitRight 1.8s cubic-bezier(0.7, 0, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes blockSplitLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes blockSplitRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.color-overlay {
+  animation: overlayFadeOut 0.3s ease 2.3s forwards;
+}
+
+@keyframes overlayFadeOut {
+  to {
+    visibility: hidden;
+    z-index: -1;
+  }
+}
+
+/* Navigation */
+.main-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(0.9375rem);
+  background: rgba(235, 228, 195, 0.25);
+  border-bottom: 0.0625rem solid rgba(119, 86, 70, 0.2);
+  padding: 0.5rem 2rem;
+  transition: all 0.3s ease;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 120rem;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.hamburger-toggle {
+  display: none;
+}
+
+.hamburger-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-btn:hover {
+  background: rgba(239, 191, 4, 0.2);
+}
+
+.hamburger-lines {
+  position: relative;
+  width: 1.6rem;
+  height: 0.2rem;
+  background: #775646;
+  transition: all 0.3s ease;
+  border-radius: 0.125rem;
+}
+
+.hamburger-lines::before,
+.hamburger-lines::after {
+  content: "";
+  position: absolute;
+  width: 1.6rem;
+  height: 0.2rem;
+  background: #775646;
+  border-radius: 0.125rem;
+  transition: all 0.3s ease;
+}
+
+.hamburger-lines::before {
+  top: -0.5rem;
+}
+
+.hamburger-lines::after {
+  bottom: -0.5rem;
+}
+
+.hamburger-toggle:checked + .hamburger-btn .hamburger-lines {
+  background: transparent;
+}
+
+.hamburger-toggle:checked + .hamburger-btn .hamburger-lines::before {
+  top: 0;
+  transform: rotate(45deg);
+  background: #2f2f2f;
+}
+
+.hamburger-toggle:checked + .hamburger-btn .hamburger-lines::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+  background: #2f2f2f;
+}
+
+.hamburger-toggle:checked + .hamburger-btn {
+  background: rgba(218, 165, 32, 0.4);
+}
+
+.brand-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container {
+  width: 8.4rem;
+  height: 6rem;
+  background: linear-gradient(
+    135deg,
+    rgba(239, 191, 4, 0.15),
+    rgba(119, 86, 70, 0.1)
+  );
+  border: 0.15rem solid #775646;
+  border-radius: 0.75rem;
+  padding: 0.4rem;
+  box-shadow: 0 0.5rem 1.6rem rgba(119, 86, 70, 0.3),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0.625rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-container:hover {
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.75rem 2.2rem rgba(119, 86, 70, 0.4),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.4);
+  border-color: #483901;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  filter: contrast(1.1) brightness(1.05);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-container:hover .logo-image {
+  filter: contrast(1.2) brightness(1.1);
+  transform: scale(1.02);
+}
+
+.nav-social {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.social-btn {
+  background: rgba(119, 86, 70, 0.1);
+  border: 0.1rem solid #775646;
+  color: #775646;
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.social-btn:hover {
+  background: #efbf04;
+  color: white;
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.25rem rgba(239, 191, 4, 0.4);
+}
+
+/* Hamburger Menu Overlay */
+.hamburger-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #775646, #483901);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(1.25rem);
+}
+
+.hamburger-toggle:checked ~ .nav-container .hamburger-overlay {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-links {
+  list-style: none;
+  margin: 2rem 0;
+}
+
+.menu-links li {
+  margin: 1.5rem 0;
+}
+
+.menu-links a {
+  color: #efbf04;
+  text-decoration: none;
+  font-size: 3rem; /* Increased */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.menu-links a:hover {
+  color: white;
+  text-shadow: 0 0 1.25rem rgba(239, 191, 4, 0.6);
+}
+
+.close-menu {
+  color: #efbf04;
+  font-size: 2.4rem; /* Increased */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  background: linear-gradient(
+      135deg,
+      rgba(235, 228, 195, 0.7) 0%,
+      rgba(245, 240, 232, 0.8) 100%
+    ),
+    url("Website Material/Website Material/Potential Posters/ChatGPT Image Jun 30, 2025, 07_03_46 PM.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-container {
+  max-width: 140rem;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 6.25rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 25% 35% 25%;
+  gap: 7.5%;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.hero-image-left,
+.hero-image-right {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  box-shadow: 0 1.25rem 2.5rem rgba(119, 86, 70, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hero-image {
+  width: 100%;
+  height: 35rem;
+  object-fit: cover;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 4.2rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-heading {
+  background: rgba(250, 250, 210, 0.45);
+  backdrop-filter: blur(0.625rem);
+  padding: 3rem 2rem;
+  border-radius: 1.25rem;
+  border: 0.1rem solid rgba(239, 191, 4, 0.2);
+  box-shadow: 0 0.625rem 1.875rem rgba(119, 86, 70, 0.2);
+
+}
+
+.hero-title {
+  font-size: 7.2rem ; /* Increased */
+  line-height: 1.1 !important;
+  font-weight: 700;
+  color: #775646;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+.hero-subtitle {
+  font-size: 2.0rem; /* Increased */
+  color: #483901;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.cta-button {
+  background: linear-gradient(135deg, #efbf04, #f4d03f);
+  color: white;
+  padding: 1.4rem 3.2rem; /* Increased */
+  border: none;
+  border-radius: 10px;
+  font-size: 2.5rem; /* Increased */
+  font-weight: 600;
+  font-family: "Cormorant Garamond", serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 0.5rem 1.5625rem rgba(239, 191, 4, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   3. Properties Section Styles
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  text-decoration: none;
+  position: relative;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form elements */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #13343b;
+  background-color: #fffffb;
+  border: 0.1rem solid rgba(94, 82, 64, 0.2);
+  border-radius: 0.8rem;
+  transition: border-color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+/* Card component */
+.card {
+  background-color: #fffffb;
+  border-radius: 1.2rem;
+  border: 0.1rem solid rgba(94, 82, 64, 0.12);
+  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.04),
+    0 0.1rem 0.2rem rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  transition: box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover {
+  box-shadow: 0 0.4rem 0.6rem -0.1rem rgba(0, 0, 0, 0.04),
+    0 0.2rem 0.4rem -0.1rem rgba(0, 0, 0, 0.02);
+}
+
+/* Featured Property Section */
+.featured-property-section {
+  padding: 4rem 0;
+  background: #f8f6f0;
+}
+
+.connected-layout {
+  display: flex;
+  width: 100%;
+  height: 50rem;
+  position: relative;
+}
+
+.property-image-container {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.property-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.parallelogram-container {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-left: -7.5%;
+  z-index: -100;
+}
+
+.parallelogram-main {
+  position: absolute;
+  width: 85%;
+  height: 80%;
+  background: linear-gradient(
+    135deg,
+    #d4af37 0%,
+    #ffd700 30%,
+    #d4af37 70%,
+    #b8860b 100%
+  );
+  transform: skewX(-13deg);
+  border-radius: 1.5rem;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%) skewX(-13deg);
+  border: 0.2rem solid rgba(255, 255, 255, 0.3);
+}
+
+.property-details {
+  transform: skewX(13deg);
+  text-align: center;
+  color: #1a2332;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.property-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2.8rem; /* Increased */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.15);
+  color: #1a2332;
+}
+
+.property-price {
+  font-size: 2.2rem; /* Increased */
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a2332;
+  text-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.15);
+}
+
+/* Property Cards Section */
+.property-cards-section {
+  padding: 2rem 0 4rem 0;
+  background: #f8f6f0;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.property-card {
+  background: #ffffff;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 1rem 3rem rgba(26, 35, 50, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  border: 0.1rem solid rgba(212, 175, 55, 0.1);
+}
+
+.property-card:hover {
+  transform: translateY(-1.2rem);
+  box-shadow: 0 2.5rem 5rem rgba(26, 35, 50, 0.2);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.card-image {
+  position: relative;
+  height: 25rem;
+  overflow: hidden;
+}
+
+.card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem; /* Increased */
+  font-weight: 600;
+  color: #1a2332;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.property-card:hover .card-title {
+  color: #d4af37;
+}
+
+.card-price {
+  font-size: 1.8rem; /* Increased */
+  font-weight: 700;
+  color: #d4af37;
+  margin-bottom: 0.5rem;
+}
+
+.card-location {
+  color: #2c3e50;
+  opacity: 0.7;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem; /* Increased */
+}
+
+/* ==========================================================================
+   4. Legacy Section Styles
+   ========================================================================== */
+.legacy-section {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  background-color: #ebe4c391;
+  padding: 2rem 2.4rem;
+  min-height: 400vh;
+}
+
+.legacy-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tertiary-l-heading {
+  font-family: "Work Sans", sans-serif;
+  letter-spacing: 0.15rem;
+  font-weight: 500;
+  font-size: 1.6rem; /* Increased */
+  margin-bottom: 1.6rem;
+}
+
+.section-l-heading {
+  font-size: 5.8rem; /* Increased */
+  letter-spacing: -0.025rem;
+  line-height: 1.25;
+  color: #533c31;
+  font-weight: 700;
+  margin-bottom: 5.4rem;
+}
+
+.legacy-entire {
+  padding: 2.4rem 4.2rem;
+  width: 120rem;
+  margin: 0 auto;
+  top: 5vh;
+  position: sticky;
+}
+
+.legacy-entire .legacy-container-main {
+  background-color: #f1eeedad;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  min-height: 50rem;
+  padding: 3.2rem 2.4rem;
+  height: 60rem;
+  position: inherit;
+  height: calc(100vh - 5vh);
+}
+
+.legacy-section-heading {
+  margin-top: 0;
+  margin-bottom: 4.8rem;
+  font-size: 3.6rem; /* Increased */
+  font-weight: 700;
+  letter-spacing: -0.01rem;
+  line-height: 1.35;
+  color: #6b4d3f;
+}
+
+.legacy-section-text {
+  font-size: 1.7rem; /* Increased */
+  color: #333;
+  font-weight: 400;
+  line-height: 1.9;
+  font-family: "Work Sans", sans-serif;
+  letter-spacing: -0.015rem;
+}
+
+/* Slider styles */
+.slider-text {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.slider-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 70%;
+  object-fit: cover;
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 10rem));
+  transition: all 0.8s ease-out;
+  border-radius: 0.2rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+}
+
+.slider-nav {
+  position: absolute;
+  top: 70%;
+  left: 47.5%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  height: 60%;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   5. Footer Section Styles
+   ========================================================================== */
+
+.section-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: #f5f0e6;
+  padding: 2rem 1rem;
+}
+
+.section-footer .footer-tiles,
+.section-footer .footer-links ion-icon {
+  color: transparent !important;
+  transition: color 0.8s ease;
+}
+
+.section-footer.visible .footer-tiles,
+.section-footer.visible .footer-links ion-icon {
+  color: #4a4a4a !important;
+}
+
+.footer-logo {
+  max-width: 15rem;
+  margin-bottom: 1.6rem;
+  transition: none;
+}
+
+.title-footer {
+  font-family: "Prata", serif;
+  font-size: 2rem; /* Increased */
+  color: #a38d56;
+  margin-bottom: 3.2rem;
+}
+
+.footer-links {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5rem; /* Increased */
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+.footer-links:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+.social-links .footer-links {
+  font-size: 2.4rem; /* Increased */
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-tiles {
+  flex: 1 1 20rem;
+  margin: 1rem;
+}
+
+/* ==========================================================================
+   6. Responsive Media Queries
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .connected-layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .property-image-container,
+  .parallelogram-container {
+    width: 100%;
+    height: 40rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero-image {
+    height: 30rem;
+  }
+  .hero-title {
+    font-size: 3.2rem;
+  }
+  .hero-subtitle {
+    font-size: 1.6rem;
+  }
+
+  /* Properties */
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .property-image-container,
+  .parallelogram-container {
+    height: 35rem;
+  }
+
+  /* Legacy */
+  .legacy-container-main {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+  .slider-image {
+    width: 90%;
+    height: 30rem;
+  }
+
+  /* Footer */
+  .section-footer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
