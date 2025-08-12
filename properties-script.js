@@ -33,15 +33,15 @@ class LuxuryPropertyShowcase {
         }
 
         // Enhanced interactions for featured property
-        const featuredWrapper = document.querySelector('.featured-property-wrapper');
-        if (featuredWrapper) {
-            featuredWrapper.addEventListener('mouseenter', () => {
-                this.addFeaturedHoverEffect();
-            });
-            featuredWrapper.addEventListener('mouseleave', () => {
-                this.removeFeaturedHoverEffect();
-            });
-        }
+        // const featuredWrapper = document.querySelector('.featured-property-wrapper');
+        // if (featuredWrapper) {
+        //     featuredWrapper.addEventListener('mouseenter', () => {
+        //         this.addFeaturedHoverEffect();
+        //     });
+        //     featuredWrapper.addEventListener('mouseleave', () => {
+        //         this.removeFeaturedHoverEffect();
+        //     });
+        // }
 
     }
 
