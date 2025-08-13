@@ -418,7 +418,7 @@ a:hover {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  margin-bottom: 5.6rem;
+  margin-bottom: 7.2rem;
 }
 
 .hero-container {
@@ -760,11 +760,12 @@ a:hover {
   line-height: 1.25;
   color: #533c31;
   font-weight: 700;
-  margin-bottom: 4.4rem;
+  margin-bottom: 2.4rem;
 }
 
 .legacy-entire {
   padding: 2.4rem 4.2rem;
+  padding-top: 5.4rem;
   width: 120rem;
   margin: 0 auto;
   top: 5vh;
@@ -776,11 +777,11 @@ a:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  min-height: 50rem;
+  min-height: 40rem;
   padding: 3.2rem 2.4rem;
   height: 60rem;
   position: inherit;
-  height: calc(100vh - 5vh);
+  height: 70vh;
 }
 
 .legacy-section-heading {
