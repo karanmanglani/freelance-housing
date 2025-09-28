@@ -1,0 +1,11 @@
+
+LuxureRes_adm
+x2RolfFcOAfoqKmU
+
+mongodb+srv://LuxureRes_adm:x2RolfFcOAfoqKmU@cluster0.xjkf194.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+
+new
+LuxRes
+HpPHHJ7HaCqqXbPN
+mongodb+srv://LuxRes:HpPHHJ7HaCqqXbPN@cluster0.9ogrs7s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
