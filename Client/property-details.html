@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Details - Luxury Residency</title>
+    <link rel="stylesheet" href="propertystyles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-brand">
+          <h2>Luxury Residency</h2>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">← Back to Properties</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Loading property details...</p>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content" style="display: none">
+      <!-- Property Hero Section -->
+      <section class="property-hero">
+        <div class="hero-image-container">
+          <img
+            id="property-main-image"
+            src=""
+            alt="Property Image"
+            class="hero-image"
+          />
+          <div class="hero-overlay">
+            <div class="hero-content">
+              <h1 id="property-title" class="hero-title"></h1>
+              <p id="property-location" class="hero-location"></p>
+              <div class="price-badge">
+                <span id="property-price" class="price"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Property Details Section -->
+      <section class="property-details">
+        <div class="container">
+          <div class="details-grid">
+            <!-- Left Column - Property Info -->
+            <div class="property-info">
+              <div class="info-card">
+                <h2>Property Overview</h2>
+                <p id="property-description" class="description"></p>
+
+                <div class="features-grid">
+                  <div class="feature-item">
+                    <i class="fas fa-bed"></i>
+                    <div>
+                      <h4>Bedrooms</h4>
+                      <p id="property-bedrooms"></p>
+                    </div>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-bath"></i>
+                    <div>
+                      <h4>Bathrooms</h4>
+                      <p id="property-bathrooms"></p>
+                    </div>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-ruler-combined"></i>
+                    <div>
+                      <h4>Area</h4>
+                      <p id="property-area"></p>
+                    </div>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-car"></i>
+                    <div>
+                      <h4>Parking</h4>
+                      <p id="property-parking"></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="amenities-section">
+                  <h3>Amenities</h3>
+                  <div id="amenities-list" class="amenities-grid"></div>
+                </div>
+              </div>
+
+              <!-- Image Gallery -->
+              <div class="info-card">
+                <h2>Property Gallery</h2>
+                <div id="image-gallery" class="image-gallery"></div>
+              </div>
+            </div>
+
+            <!-- Right Column - Booking Section -->
+            <div class="booking-section">
+              <div class="booking-card">
+                <h2>Schedule a Visit</h2>
+                <p class="booking-subtitle">
+                  Select a day and available time slot to book your property
+                  viewing
+                </p>
+
+                <!-- Day Selection -->
+                <div class="day-selector">
+                  <h3>Select Day:</h3>
+                  <div class="day-buttons">
+                    <button class="day-button" data-day="0">
+                      <div class="day-label">Today</div>
+                      <div class="day-date" id="today-date"></div>
+                    </button>
+                    <button class="day-button" data-day="1">
+                      <div class="day-label">Tomorrow</div>
+                      <div class="day-date" id="tomorrow-date"></div>
+                    </button>
+                    <button class="day-button" data-day="2">
+                      <div class="day-label">Day After</div>
+                      <div class="day-date" id="dayafter-date"></div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Time Slots -->
+                <div class="time-slots-container">
+                  <h3>Available Time Slots</h3>
+                  <div id="time-slots" class="time-slots-grid">
+                    <!-- Time slots will be dynamically generated -->
+                  </div>
+                </div>
+
+                <!-- Selected Slot Info -->
+                <div
+                  id="selected-slot-info"
+                  class="selected-slot-info"
+                  style="display: none"
+                >
+                  <h4>Selected Slot:</h4>
+                  <p id="selected-slot-details"></p>
+                </div>
+
+                <!-- Booking Form -->
+                <form
+                  id="booking-form"
+                  class="booking-form"
+                  style="display: none"
+                >
+                  <div class="form-group">
+                    <label for="visitor-name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="visitor-name"
+                      name="visitorName"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="visitor-email">Email *</label>
+                    <input
+                      type="email"
+                      id="visitor-email"
+                      name="visitorEmail"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="visitor-phone">Phone Number *</label>
+                    <input
+                      type="tel"
+                      id="visitor-phone"
+                      name="visitorPhone"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="visitor-message">Message (Optional)</label>
+                    <textarea
+                      id="visitor-message"
+                      name="visitorMessage"
+                      rows="3"
+                      placeholder="Any specific requirements or questions..."
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="book-button">
+                    <i class="fas fa-calendar-check"></i>
+                    Confirm Booking
+                  </button>
+                </form>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                  <h4>Need Help?</h4>
+                  <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 XXX-XXX-XXXX</span>
+                  </div>
+                  <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@luxuryresidency.com</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i class="fas fa-check-circle success-icon"></i>
+          <h2>Booking Confirmed!</h2>
+        </div>
+        <div class="modal-body">
+          <p>
+            Your visit has been successfully scheduled. You will receive a
+            confirmation email shortly.
+          </p>
+          <div id="booking-summary"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="close-modal-btn" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD THESE TWO LINES -->
+    <script src="js/common.js"></script>
+    <script src="js/property-booking.js"></script>
+</body>
+  </body>
+</html>

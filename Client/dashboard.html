@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owner Dashboard - Rada Properties</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-gold: #efbf04;
+        --brand-brown: #775646;
+        --dark-bg: #1a2332;
+        --light-bg: #f8f6f0;
+        --text-dark: #483901;
+        --text-light: #fffffb;
+        --border-color: rgba(119, 86, 70, 0.2);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-size: 62.5%;
+      }
+
+      body {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.6rem;
+        background-color: var(--light-bg);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(2rem);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .dashboard-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.6rem;
+        color: var(--brand-brown);
+      }
+
+      .add-property-btn {
+        background: linear-gradient(135deg, var(--brand-gold), #f4d03f);
+        color: var(--brand-brown);
+        padding: 1.2rem 2.4rem;
+        border: none;
+        border-radius: 0.8rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+        font-family: "Cormorant Garamond", serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        box-shadow: 0 0.4rem 1.2rem rgba(239, 191, 4, 0.3);
+      }
+
+      .add-property-btn:hover {
+        transform: translateY(-0.2rem);
+        box-shadow: 0 0.6rem 1.8rem rgba(239, 191, 4, 0.4);
+      }
+
+      #property-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .property-card {
+        background: var(--text-light);
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 1rem 3rem rgba(119, 86, 70, 0.1);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .property-card:hover {
+        transform: translateY(-0.5rem);
+        box-shadow: 0 1.5rem 4rem rgba(119, 86, 70, 0.15);
+      }
+
+      .card-image-container {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+
+      .property-card:hover .card-image {
+        transform: scale(1.05);
+      }
+
+      .card-content {
+        padding: 2rem;
+        flex-grow: 1;
+      }
+
+      .card-content h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .card-content p {
+        margin-bottom: 0.5rem;
+        color: #6a5c53;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .card-details {
+        font-size: 1.4rem;
+        opacity: 0.8;
+        border-top: 1px solid var(--border-color);
+        padding-top: 1rem;
+        margin-top: 1rem;
+        white-space: pre-wrap; /* To respect newlines in textarea */
+      }
+
+      .card-footer {
+        padding: 1.5rem 2rem;
+        background-color: #fdfcf9;
+        border-top: 1px solid var(--border-color);
+        text-align: right;
+      }
+
+      .remove-btn {
+        background: transparent;
+        border: 1px solid #c0392b;
+        color: #c0392b;
+        padding: 0.8rem 1.6rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      .remove-btn:hover {
+        background: #c0392b;
+        color: white;
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(26, 35, 50, 0.7);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal {
+        background: var(--light-bg);
+        border-radius: 2rem;
+        padding: 3rem;
+        box-shadow: 0 2rem 4rem rgba(26, 35, 50, 0.2);
+        max-width: 500px;
+        width: 90%;
+        transform: translateY(-5rem) scale(0.95);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-overlay.active .modal {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .modal-header h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.8rem;
+        color: var(--brand-brown);
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--brand-brown);
+        margin-bottom: 0.8rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 1.2rem 1.6rem;
+        border: 2px solid var(--border-color);
+        border-radius: 1.2rem;
+        font-size: 1.6rem;
+        font-family: "Cormorant Garamond", serif;
+        background: rgba(255, 255, 251, 0.8);
+        color: var(--text-dark);
+        transition: all 0.3s ease;
+      }
+
+      textarea.form-input {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--brand-gold);
+      }
+
+      .modal-close-btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        font-size: 2.4rem;
+        color: var(--brand-brown);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .modal-close-btn:hover {
+        transform: scale(1.1);
+      }
+
+      #no-properties-message {
+        text-align: center;
+        padding: 5rem 2rem;
+        font-size: 1.8rem;
+        color: rgba(72, 57, 1, 0.6);
+        grid-column: 1 / -1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <h1>Property Management</h1>
+        <button class="add-property-btn" id="addPropertyBtn">
+          <i class="fas fa-plus"></i> Add Property
+        </button>
+      </header>
+
+      <main>
+        <div id="property-list">
+          <!-- Properties will be injected here by JavaScript from Firestore -->
+        </div>
+      </main>
+    </div>
+
+    <!-- Add/Edit Property Modal -->
+    <div class="modal-overlay" id="propertyModal">
+      <div class="modal">
+        <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+        <div class="modal-header">
+          <h2>Add New Listing</h2>
+        </div>
+        <form id="propertyForm">
+          <div class="form-group">
+            <label for="propertyName" class="form-label">Property Name</label>
+            <input
+              type="text"
+              id="propertyName"
+              class="form-input"
+              placeholder="e.g., The Golden Villa"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="propertyPrice" class="form-label">Price ($)</label>
+            <input
+              type="number"
+              id="propertyPrice"
+              class="form-input"
+              placeholder="e.g., 2,500,000"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="propertyLocation" class="form-label">Location</label>
+            <input
+              type="text"
+              id="propertyLocation"
+              class="form-input"
+              placeholder="e.g., Beverly Hills, CA"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="propertyImage" class="form-label">Image URL</label>
+            <input
+              type="url"
+              id="propertyImage"
+              class="form-input"
+              placeholder="https://example.com/image.jpg"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="propertyDetails" class="form-label"
+              >Property Details</label
+            >
+            <textarea
+              id="propertyDetails"
+              class="form-input"
+              placeholder="e.g., 4 Bedrooms, 5 Bathrooms, Pool, Ocean View..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="add-property-btn"
+            style="width: 100%; justify-content: center"
+          >
+            <i class="fas fa-save"></i> Save Property
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+  </body>
+</html>
