@@ -1,5 +1,5 @@
 // This file holds the API URL and shared functions like checking login status.
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://freelance-housing.onrender.com";
 
 function checkLoginStatus() {
   const loginBtn = document.getElementById("loginBtn");
